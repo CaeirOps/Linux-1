@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Linux-1.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<p><img src="./img/linux-logo.png" alt="linux-logo"></p>
+<h1 id="linux---1">Linux - 1</h1>
+<ul>
+<li><a href="#provisionando-o-ambiente">Provisionando o Ambiente</a>
+<ul>
+<li><a href="#virtual-box">Virtual Box</a></li>
+<li><a href="#vagrant">Vagrant</a></li>
+</ul>
+</li>
+<li><a href="#breve-hist%C3%B3ria">Breve História</a>
+<ul>
+<li><a href="#in%C3%ADcio-do-linux">Início do Linux</a></li>
+<li><a href="#foss">FOSS</a></li>
+</ul>
+</li>
+<li><a href="#inicializa%C3%A7%C3%A3o-do-sistema">Inicialização do Sistema</a>
+<ul>
+<li><a href="#introdu%C3%A7%C3%A3o">Introdução</a></li>
+<li><a href="#gerenciando-servi%C3%A7os">Gerenciando Serviços</a></li>
+<li><a href="#systemd">Systemd</a></li>
+</ul>
+</li>
+<li><a href="#file-system">File System</a>
+<ul>
+<li><a href="#arquitetura-de-diret%C3%B3rios">Arquitetura de diretórios</a></li>
+</ul>
+</li>
+<li><a href="#comandos-essenciais">Comandos Essenciais</a>
+<ul>
+<li><a href="#linha-de-comando">Linha de comando</a></li>
+<li><a href="#documenta%C3%A7%C3%B5es-e-filtros">Documentações e Filtros</a></li>
+<li><a href="#redirecionamento">Redirecionamento</a></li>
+<li><a href="#pesquisas-e-regex">Pesquisas e REGEX</a></li>
+</ul>
+</li>
+<li><a href="#editores-de-texto">Editores de Texto</a>
+<ul>
+<li><a href="#overview-dos-editores">Overview dos editores</a></li>
+<li><a href="#vim">VIM</a></li>
+</ul>
+</li>
+<li><a href="#shell">Shell</a>
+<ul>
+<li><a href="#tipos-de-shell">Tipos de Shell</a></li>
+<li><a href="#configura%C3%A7%C3%B5es-do-bash">Configurações do Bash</a></li>
+</ul>
+</li>
+<li><a href="#empacotadores-e-compress%C3%A3o">Empacotadores e Compressão</a>
+<ul>
+<li><a href="#empacotamento-com-tar">Empacotamento com TAR</a></li>
+<li><a href="#tipos-de-compress%C3%A3o">Tipos de compressão</a></li>
+<li><a href="#empacotando-e-comprimindo">Empacotando e Comprimindo</a></li>
+</ul>
+</li>
+<li><a href="#instala%C3%A7%C3%A3o-de-programas">Instalação de Programas</a>
+<ul>
+<li><a href="#gerenciadores-de-pacotes">Gerenciadores de Pacotes</a></li>
+<li><a href="#dpkg-e-rpm">DPKG e RPM</a></li>
+<li><a href="#apt-e-yum">APT e YUM</a></li>
+<li><a href="#compila%C3%A7%C3%A3o-de-pacotes">Compilação de Pacotes</a></li>
+</ul>
+</li>
+<li><a href="#gerenciamento-de-usu%C3%A1rios">Gerenciamento de Usuários</a>
+<ul>
+<li><a href="#administra%C3%A7%C3%A3o-de-usu%C3%A1rios">Administração de usuários</a></li>
+<li><a href="#gerenciamento-de-permiss%C3%B5es">Gerenciamento de Permissões</a></li>
+<li><a href="#configurando-sudo">Configurando SUDO</a></li>
+</ul>
+</li>
+<li><a href="#gerenciamento-de-redes">Gerenciamento de Redes</a>
+<ul>
+<li><a href="#configura%C3%A7%C3%A3o-de-interfaces">Configuração de Interfaces</a></li>
+<li><a href="#rotas-est%C3%A1ticas">Rotas estáticas</a></li>
+<li><a href="#resolu%C3%A7%C3%A3o-de-nomes">Resolução de Nomes</a></li>
+<li><a href="#dhclient">DHClient</a></li>
+</ul>
+</li>
+<li><a href="#acesso-remoto">Acesso Remoto</a>
+<ul>
+<li><a href="#conceitos-de-acesso-remoto">Conceitos de Acesso Remoto</a></li>
+<li><a href="#conceitos-de-criptografia">Conceitos de Criptografia</a></li>
+<li><a href="#ssh-e-chaves-rsa">SSH e Chaves RSA</a></li>
+</ul>
+</li>
+<li><a href="#gerenciamento-de-logs-time-zone-e-ntp">Gerenciamento de Logs, Time Zone e NTP</a>
+<ul>
+<li><a href="#arquivos-de-logs">Arquivos de logs</a></li>
+<li><a href="#rsyslog">RSyslog</a></li>
+<li><a href="#time-zone">Time Zone</a></li>
+<li><a href="#ntp">NTP</a></li>
+</ul>
+</li>
+<li><a href="#gerenciamento-de-processos">Gerenciamento de Processos</a>
+<ul>
+<li><a href="#introdu%C3%A7%C3%A3o-%C3%A0-processos">Introdução à Processos</a></li>
+<li><a href="#pesquisas-e-filtros-de-processos">Pesquisas e Filtros de Processos</a></li>
+<li><a href="#planos-e-prioridades">Planos e Prioridades</a></li>
+</ul>
+</li>
+<li><a href="#gerenciamento-de-dispositivos-e-discos">Gerenciamento de Dispositivos e Discos</a>
+<ul>
+<li><a href="#gerenciamento-de-dispositivos">Gerenciamento de Dispositivos</a></li>
+<li><a href="#gerenciamento-de-discos-e-pontos-de-montagem">Gerenciamento de Discos e Pontos de Montagem</a></li>
+<li><a href="#lvm">LVM</a></li>
+</ul>
+</li>
+<li><a href="#shell-script-e-cron">Shell Script e Cron</a>
+<ul>
+<li><a href="#conceitos-de-shell-script">Conceitos de Shell Script</a></li>
+<li><a href="#agendamento-de-tarefas-com-crontab">Agendamento de tarefas com Crontab</a></li>
+</ul>
+</li>
+<li><a href="#conte%C3%BAdo-complementar">Conteúdo complementar:</a>
+<ul>
+<li><a href="#livros">Livros:</a></li>
+<li><a href="#regex">Regex:</a></li>
+<li><a href="#shell-1">Shell:</a></li>
+<li><a href="#vim-1">VIM</a></li>
+<li><a href="#simulado-lpi-1">SIMULADO LPI 1</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="provisionando-o-ambiente">Provisionando o Ambiente</h2>
+<h3 id="virtual-box">Virtual Box</h3>
+<h3 id="vagrant">Vagrant</h3>
+<hr>
+<h2 id="breve-hist%C3%B3ria">Breve História</h2>
+<h3 id="in%C3%ADcio-do-linux">Início do Linux</h3>
+<h3 id="foss">FOSS</h3>
+<hr>
+<h2 id="inicializa%C3%A7%C3%A3o-do-sistema">Inicialização do Sistema</h2>
+<h3 id="introdu%C3%A7%C3%A3o">Introdução</h3>
+<h3 id="gerenciando-servi%C3%A7os">Gerenciando Serviços</h3>
+<h3 id="systemd">Systemd</h3>
+<p>BIOS &gt; Bootloader-1 (MBR) &gt; Bootloader-2 (GRUB) &gt; Kernel &gt; INIT</p>
+<p>rc0 =<br>
+rc1 =<br>
+rc2-5 =<br>
+rc6 =</p>
+<p>service =<br>
+systemctl =<br>
+insserv =</p>
+<p>/lib/systemd/system/ =</p>
+<hr>
+<h2 id="file-system">File System</h2>
+<h3 id="arquitetura-de-diret%C3%B3rios">Arquitetura de diretórios</h3>
+<hr>
+<h2 id="comandos-essenciais">Comandos Essenciais</h2>
+<h3 id="linha-de-comando">Linha de comando</h3>
+<ul>
+<li>
+<p>whoami = mostra o usuário corrente</p>
+</li>
+<li>
+<p>last = mostra os ultimos usuários conectados</p>
+</li>
+<li>
+<p>passwd = alteração de senha</p>
+</li>
+<li>
+<p>hostname = mostra o nome da máquina</p>
+</li>
+<li>
+<p>uname = informações do kernel / SO</p>
+</li>
+<li>
+<p>ifconfig / ip a = informações de rede</p>
+</li>
+<li>
+<p>sudo = elevação de permissão</p>
+</li>
+<li>
+<p>ls = listagem de diretórios e arquivos</p>
+</li>
+<li>
+<p>pwd = diretório corrente</p>
+</li>
+<li>
+<p>cat = mostra o conteúdo de um arquivo</p>
+</li>
+<li>
+<p>mkdir = criação de diretórios</p>
+</li>
+<li>
+<p>touch = criação de arquivos em branco | alteração de data de modificação do arquivo</p>
+</li>
+<li>
+<p>tree = mostra os níveis dos diretórios e arquivos</p>
+</li>
+<li>
+<p>stat = status de arquivos | tipo de arquivo | tamanho | criação, modificação...</p>
+</li>
+<li>
+<p>cp = copiar</p>
+</li>
+<li>
+<p>file = tipo arquivo</p>
+</li>
+<li>
+<p>mv = mover | renomear</p>
+</li>
+<li>
+<p>rm = remover arquivo</p>
+</li>
+<li>
+<p>rmdir = remover diretórios em branco</p>
+</li>
+<li>
+<p>ln = criação de atalhos</p>
+</li>
+<li>
+<p>unlink = remoção de atalhos</p>
+</li>
+<li>
+<p>clear ou ctrl+l = limpa a tela do bash</p>
+</li>
+<li>
+<p>ctrl+r ou setas = busca comandos já executados</p>
+</li>
+</ul>
+<h3 id="documenta%C3%A7%C3%B5es-e-filtros">Documentações e Filtros</h3>
+<p>man = Manual dos comandos, contendo descrição e os parametros possiveis<br>
+mandb = Criar ou atualizar o cache dos manuais<br>
+help = Ajuda sintetizada sobre o comando<br>
+apropos ou man -k = Mostra o propósito do comando</p>
+<p>wc = Contagem bytes, palavras, linhas, etc..<br>
+head = Pega as primeiras 10 linhas de um arquivo ou saida de um comando<br>
+tail = Mesma coisa que o head, porém com o final do conteúdo<br>
+sort = Ordena a saída<br>
+tr = Transforma minusculo em maiusculo<br>
+cut = Filtrar com delimitador e pegar somente os campos desejados<br>
+awk = Filtrar com delimitador e pegar somente os campos desejados<br>
+locate = Verficar a localização de um arquivo<br>
+grep - egrep = Filtros por palavra chave<br>
+diff = Visualizar a diferença entre os arquivos</p>
+<h3 id="redirecionamento">Redirecionamento</h3>
+<ul>
+<li>
+<blockquote>
+<p>= Direcionar a saida padrão (stdout) de um comando</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<blockquote>
+<p>= Concatenar a saida de um comando</p>
+</blockquote>
+</blockquote>
+</li>
+<li>2&gt; = Direcionando a saida de erro (stderr)</li>
+<li>2&gt;&amp;1 = Direcionar a saída de erro para o mesmo destino da saida padrão</li>
+</ul>
+<h3 id="pesquisas-e-regex">Pesquisas e REGEX</h3>
+<hr>
+<h2 id="editores-de-texto">Editores de Texto</h2>
+<h3 id="overview-dos-editores">Overview dos editores</h3>
+<h3 id="vim">VIM</h3>
+<p>vimtutor = Manual</p>
+<p>:q = sair<br>
+:q! = sair sem salvar<br>
+:w = salvar<br>
+:x = salvar e sair<br>
+ZZ = salvar e sair<br>
+gg = vai para o topo do arquivo<br>
+yy = copia a linha<br>
+G = vai para o final do arquivo<br>
+p = Cola<br>
+cc = Recortar<br>
+dd = Recortar ou Deletar<br>
+ESC ou  crtl+c = Sair do modo de inserção<br>
+i ou insert = Entrar no modo de inserção<br>
+/ ou ? = Abre uma busca no VIM<br>
+vim -O = Permite abrir 2 ou mais arquivos simultâneos, divididos horizontalmente<br>
+ctrl+ww = Alternar entre os arquivos abertos simultâneamente<br>
+:set = Permite habilitar ou desabilitar funções do VIM<br>
+:syntax = Habilita ou desabilita interpretação do conteúdo e coloração<br>
+:! = Permite executar comando no bash sem sair do VIM<br>
+:r = Permite trazer o conteúdo de saida de um comando para dentro do arquivo no VIM</p>
+<hr>
+<h2 id="shell">Shell</h2>
+<h3 id="tipos-de-shell">Tipos de Shell</h3>
+<h3 id="configura%C3%A7%C3%B5es-do-bash">Configurações do Bash</h3>
+<p>Local = Só é válida para aquela sessão de shell de um usuário<br>
+Global = Será válida para todas as sessões de shell de um usuário</p>
+<p>export = Deixar a variável de modo global<br>
+set = Lista as variáveis locais e globais<br>
+unset = Remover variáveis<br>
+env = Lista as variáveis globais</p>
+<p>$SHLVL = Armazena o nivel de sessão shell<br>
+$PATH = Armazena o valor dos diretórios que contem os binários dos comandos<br>
+$USER = Armazena o nome do usuário corrente<br>
+$PWD = Armazena o diretório corrente<br>
+$SHELL = Armazena o tipo shell padrão<br>
+$EDITOR = Armazena o valor do editor de texto padrão</p>
+<p>/etc/profile = Contem todas as configurações de shell comum para os usuários<br>
+.profile = Único por usuário e contem configurações de shell dele<br>
+.bash_login = Mensagem de boas vindas por usuário<br>
+.bashrc = Contem configurações de shell do usuário corrente<br>
+.bash_logout = Mensagens/Baner ou ações após a saída do shell</p>
+<p>source = Serve para carregar as informações atualizadas de um arquivo de configuração<br>
+alias = Apelido, para transformar uma palavra qualquer em um comando</p>
+<hr>
+<h2 id="empacotadores-e-compress%C3%A3o">Empacotadores e Compressão</h2>
+<h3 id="empacotamento-com-tar">Empacotamento com TAR</h3>
+<h3 id="tipos-de-compress%C3%A3o">Tipos de compressão</h3>
+<h3 id="empacotando-e-comprimindo">Empacotando e Comprimindo</h3>
+<p>tar = empacotador<br>
+cpio = empacotador (desenvolvido para backup)<br>
+zip = Compressão de arquivos<br>
+gzip = algoritmo para compressão de arquivos<br>
+bzip2 =algoritmo para compressão de arquivos (Taxa de compressão mais alta, porém leva mais tempo)<br>
+unzip = Descompressão de arquivos<br>
+gunzip = descompressão de arquivos GZIP<br>
+bunzip2 = descompressão de arquivos BZIP2</p>
+<hr>
+<h2 id="instala%C3%A7%C3%A3o-de-programas">Instalação de Programas</h2>
+<h3 id="gerenciadores-de-pacotes">Gerenciadores de Pacotes</h3>
+<h3 id="dpkg-e-rpm">DPKG e RPM</h3>
+<h3 id="apt-e-yum">APT e YUM</h3>
+<h3 id="compila%C3%A7%C3%A3o-de-pacotes">Compilação de Pacotes</h3>
+<p>dpkg = Gerenciador de pacotes de baixo nível para sistemas baseados em Debian<br>
+rpm = Gerenciador de pacotes de baixo nível para sistemas baseados em Red Hat<br>
+apt = Gerenciador de pacotes de alto nível para sistemas baseados em Debian<br>
+yum = Gerenciador de pacotes de alto nível para sistemas baseados em Red Hat<br>
+alien = Programa utilizado para transformar um pacote .DEB para .RPM &lt;&gt;<br>
+rpmrebuild = Validar a compilação do pacote RPM</p>
+<p>rpmrebuild -pe dateutils-0.4.1-2.x86_64.rpm</p>
+<p>rpm -Uvh rpmbuild/RPMS/x86_64/dateutils-0.4.1-2.x86_64.rpm</p>
+<p>lstop = Visualização do consumo de recursos<br>
+htop = Visualização do consumo de recursos com mais recursos gráficos<br>
+tar = Empacotamento</p>
+<hr>
+<h2 id="gerenciamento-de-usu%C3%A1rios">Gerenciamento de Usuários</h2>
+<h3 id="administra%C3%A7%C3%A3o-de-usu%C3%A1rios">Administração de usuários</h3>
+<p>/etc/passwd lala<br>
+/etc/shadow = Contem as senhas dos usuários<br>
+/etc/groups = Contem as informações dos grupos do sistema<br>
+/etc/gshadow = Contem as senhas dos grupos<br>
+/etc/login.defs = Contem as definições de login dos usuários<br>
+/etc/skel/ = Contem a hierarquia de diretórios e arquivos da home dos usuários (template)</p>
+<p>getent = Mostra/Captura dados dos arquivos de base de dados do sistema, ex: passwd, shadow, groups, hosts...<br>
+id = Mostra id do usuário<br>
+groups = Mostra os grupos que um usuário pertence<br>
+finger = Mostra informações detalhadas do usuário<br>
+who - w = Mostra todos os usuários logados naquele momento<br>
+adduser = Cria novos usuário<br>
+userdel = Deleta usuários<br>
+usermod = Altera as propriedades de um usuário<br>
+chage = Configurar as políticas de senha</p>
+<p>groupadd = Cria um grupo<br>
+gpasswd = Adiciona usuários à um grupo<br>
+chown = Altera o owner(dono) de um diretório/arquivo<br>
+chgrp = Alterar o grupo owner de um diretório/arquivo</p>
+<h3 id="gerenciamento-de-permiss%C3%B5es">Gerenciamento de Permissões</h3>
+<p>r = 4<br>
+w = 2<br>
+x = 1</p>
+<p>umask = define o padrão de permissões para criação de diretórios e arquivos<br>
+suid bit = Herdar as permissões do owner de um binário na hora da execução<br>
+sgid bit = Permite a herança de permissões em diretórios<br>
+stick bit = Restingir a deleção de objetos para para o owner</p>
+<h3 id="configurando-sudo">Configurando SUDO</h3>
+<p>/etc/sudoers = Configuração dos limites de execução de comandos dos usuários</p>
+<hr>
+<h2 id="gerenciamento-de-redes">Gerenciamento de Redes</h2>
+<h3 id="configura%C3%A7%C3%A3o-de-interfaces">Configuração de Interfaces</h3>
+<h3 id="rotas-est%C3%A1ticas">Rotas estáticas</h3>
+<h3 id="resolu%C3%A7%C3%A3o-de-nomes">Resolução de Nomes</h3>
+<h3 id="dhclient">DHClient</h3>
+<p>ifconfig =  listar as interfaces e suas configurações<br>
+mii-tool = mostra o status detalhados de uma interface<br>
+route = gerencia da tabela de rotas<br>
+ethtool = mostra o status detalhados de uma interface<br>
+ip = Gerenciar as configurações de rede<br>
+dhclient = Buscar um novo ip dinamicamente no servidor de DHCP</p>
+<p>/etc/hosts = Contem a relação de ip/fqdn inseipconfig<br>
+ipcinfigrida manualmente<br>
+/etc/resolv.conf = Conter as informações de servidor DNS e domínio<br>
+/etc/nsswitch.conf = Contem a ordem que o sistema operacional irá tentar resolver os nomes<br>
+/etc/hostname = Contem o nome da máquina</p>
+<p>/etc/network/interfaces/ = Debian<br>
+/etc/sysconfig/network-s/ = CentOS/Red Hat</p>
+<hr>
+<h2 id="acesso-remoto">Acesso Remoto</h2>
+<h3 id="conceitos-de-acesso-remoto">Conceitos de Acesso Remoto</h3>
+<h3 id="conceitos-de-criptografia">Conceitos de Criptografia</h3>
+<h3 id="ssh-e-chaves-rsa">SSH e Chaves RSA</h3>
+<p>ssh = Protocolo &quot;Secure Shell&quot;<br>
+rsync = Utilitário para realizar sincronização entre diretórios locais e/ou remotos</p>
+<p>openssh = Pacote para instalação do SSH</p>
+<p>~/.ssh/known_hosts = Arquivo que armazena o fingerprint dos hosts já acessados<br>
+~/.ssh/authorized_keys = Arquivo que armazena as chaves públicas copiadas<br>
+/etc/ssh/ssh_config = Arquivo de configuração do cliente SSH<br>
+/etc/ssh/sshd_config = Arquivo de configuração do servidor SSH</p>
+<p>ssh-keygen = Comando para gerar par de chaves criptográficas<br>
+ssh-copy-id = Copia a chave pública para o servidor remoto</p>
+<p>/etc/hosts.allow = Lista de permissão para utilização de serviços<br>
+/etc/hosts.deny = Lista de restrição para utilização de serviços</p>
+<hr>
+<h2 id="gerenciamento-de-logs-time-zone-e-ntp">Gerenciamento de Logs, Time Zone e NTP</h2>
+<h3 id="arquivos-de-logs">Arquivos de logs</h3>
+<p>dmesg = Contem as informações de hardware mapeadas pelo kernel<br>
+messages = Contem todas as informações de aplicações e serviços<br>
+lastlog = Contem as informações de login de usuários<br>
+wtmp = Contem as informações de queme stá logado no momento<br>
+auth.log = Contem as informações sobre autenticação e alteração de usuário</p>
+<h3 id="rsyslog">RSyslog</h3>
+<p>logrotate = Comando para realizar a rotação de log manualmente</p>
+<p>/etc/rsyslog.conf = Arquivo principal de configuração do RSYSLOG<br>
+/etc/logrotate.d/ = Diretório para aramazenar arquivos de configuração adicional para o logrotate</p>
+<h3 id="time-zone">Time Zone</h3>
+<p>locale-gen = Habilitar ou desabilitar idioma e localização<br>
+dpkg-reconfigure locales = Habilitar ou desabilitar idioma e localização<br>
+update-locale = Configura o idioma e localização<br>
+timedatectl = Listar/Configurar as configurações de local, data e hora<br>
+TZ = Variável que contem o valor de timezone</p>
+<h3 id="ntp">NTP</h3>
+<p>ntp = Network Time Protocol<br>
+hwclock = Sincronizar o horário da BIOS com o  do sistema operacional<br>
+date = Visualizar a data e/ou configurar uma data e hora<br>
+ntpdate = Sincroniza o horário com o servidor NTP</p>
+<p>/etc/ntp.conf = Arquivo de configuração do NTP</p>
+<hr>
+<h2 id="gerenciamento-de-processos">Gerenciamento de Processos</h2>
+<h3 id="introdu%C3%A7%C3%A3o-%C3%A0-processos">Introdução à Processos</h3>
+<h3 id="pesquisas-e-filtros-de-processos">Pesquisas e Filtros de Processos</h3>
+<p>ps = Lista os processos em execução<br>
+pstree = Lista os processos em execução com a visualização de árvore<br>
+pgrep = Procura por uma parte do nome do processo e mostra o PID<br>
+pidof = Mostra o PID do processo, porém é só procurar pelo nome completo<br>
+lsof = Lista os arquivos abertos<br>
+kill = Envia sinais de controle para os processos<br>
+pkill = Permite tratar um processo colocando apenas uma parte do nome</p>
+<h3 id="planos-e-prioridades">Planos e Prioridades</h3>
+<p>jobs = Lista os programas executando em segundo plano<br>
+fg = Envia o programa para o primeiro plano<br>
+bg = Executa os comandos parados em segundo plano<br>
+nohup = Inicia um programa em segundo plano sem prender a sessão de terminal<br>
+nice = Inicia um programa com a prioridade alterada<br>
+renice = Altera a prioridade de um programa em execução</p>
+<hr>
+<h2 id="gerenciamento-de-dispositivos-e-discos">Gerenciamento de Dispositivos e Discos</h2>
+<h3 id="gerenciamento-de-dispositivos">Gerenciamento de Dispositivos</h3>
+<p>devfs = Gerenciador de dispositivos que cria todos os arquivos de dispositivos no boot<br>
+udev = Gerenciador de dispositivos dinâmico que cria os arquivos apenas quando este é acionado</p>
+<p>/proc/cmdline = Argumentos passados para Kernel pelo loader (Grub)<br>
+/proc/cpuinfo = Informações específicas sobre processador<br>
+/proc/filesystems = Sistemas de arquivos suportados pelo Kernel<br>
+/proc/interrupts = Informações sobre o número de interrupções e seus dispositivos<br>
+/proc/meminfo = Informações sobre memória da máquina<br>
+/proc/modules = Informações sobre módulos carregados na memória<br>
+/proc/partitions = Partições conhecidas pelo sistema<br>
+/proc/uptime = Tempo que o sistema está ligado</p>
+<p>lspci (pciutils) = Mostra os dispositivos integrados ao barramento PCI<br>
+lsusb (usbutils)= Mostra os dispositivos conectados ao barramento USB<br>
+lsmod = Lista os módulos ativos no sistema pelo Kernel</p>
+<h3 id="gerenciamento-de-discos-e-pontos-de-montagem">Gerenciamento de Discos e Pontos de Montagem</h3>
+<p>fdisk = Programa para criação e manipulação de tabelas de partições (GPT, MBR, Sun, SGI e BSD)<br>
+cfdisk = Programa para criação e manipulação de tabelas de partições (GPT, MBR, Sun, SGI e BSD)<br>
+gdisk = Programa para criação e manipulação de tabelas de partições GPT<br>
+partprobe = Reeleitura da tabela de particionamento sem precisar de reinicialização</p>
+<p>ext2 = Um dos primeiros filesystem do Linux<br>
+ext3 = Idêntico ao ext2 porém com função de journal<br>
+ext4 = Evolução do ext3 tratando arquivos maiores e com funções adicionais<br>
+xfs = Melhor tratamento com objetos grandes, indicado para banco de dados por sua performance<br>
+swap = Parte do disco utilizado como &quot;RAM&quot;</p>
+<p>mkfs.*** = Formata uma partição com um filesystem escolhido<br>
+mkswap = Formata uma partição de swap<br>
+mount = Lista e configura pontos de montagem<br>
+umount = Realiza a desmontagem<br>
+df =<br>
+du =<br>
+swapon =<br>
+swapoff =<br>
+sysctl =<br>
+blkid =<br>
+lsblk =<br>
+tune2fs =<br>
+e2fsck =<br>
+/etc/fstab =<br>
+autofs =<br>
+cryptsetup =<br>
+cryptfs =<br>
+modprobe =</p>
+<h3 id="lvm">LVM</h3>
+<hr>
+<h2 id="shell-script-e-cron">Shell Script e Cron</h2>
+<h3 id="conceitos-de-shell-script">Conceitos de Shell Script</h3>
+<p>1 - Primeira linha deve conter o interpretador shell<br>
+2 - Permissão de execução no arquivo<br>
+3 - Por convenção inserir &quot;.sh&quot; no nome do arquivo</p>
+<p>echo = Exibe um texto na saída padrão<br>
+sleep = aguarda um período de tempo para execução do comando seguinte<br>
+read = recebe o valor de uma variável<br>
+&amp; = executa o comando em segundo plano<br>
+exit = sai do</p>
+<p>$1 = Valor do primeiro parâmetro<br>
+$* = Valor de todos os parâmetros<br>
+$# = Quantidade de parâmetros passados<br>
+$0 = Nome do<br>
+$? = exibe o código de retorno do comando</p>
+<p>-eq = num1 -eq num2 : num1 é igual a num2 (equal to)<br>
+-ne = num1 -ne num2 : num1 não é igual a num2 (not equal to)<br>
+-gt = num1 -gt num2 : num1 é maior que num2 (greater than)<br>
+-ge =num1 -ge num2 : num1 é maior ou igual a num2 (greater or equal)<br>
+-lt = num1 -lt num2 : num1 é menor que num2 (less than)<br>
+-le = num1 -le num2 : num1 é menor ou igual a num2 (less or equal)</p>
+<p>-e = O arquivo existe (exists)<br>
+-nt = O arquivo é mais novo que (newer than)<br>
+-ot = O arquivo é mais antigo que (older than)<br>
+-d = O diretório existe</p>
+<p>test = Teste condicional<br>
+if = Utilizamos operações lógicas, permitindo que o  tome decisões, ou seja, que exceções sejam tratadas<br>
+case = Utilizado para comandos de fluxo, tal como o if, porém enquanto if testa expressões não exatas, &quot;case&quot; agirá de acordo com resultados exatos<br>
+while = Acontecerá execução enquanto a condição for verdadeira<br>
+for = Para cada valor recebido será feito o que for determinado</p>
+<h3 id="agendamento-de-tarefas-com-crontab">Agendamento de tarefas com Crontab</h3>
+<p>time = exibe o tempo gasto na execução de um comando<br>
+at = agendamentos únicos de tarefas<br>
+atq = exibe a fila de agendamento do AT<br>
+cron = agendador de tarefas recorrentes, nativo no Linux<br>
+crontab = arquivo de configuração para agendar as tarefas<br>
+run-parts = Teste de execução das tarefas no cron</p>
+<hr>
+<h2 id="conte%C3%BAdo-complementar">Conteúdo complementar:</h2>
+<ul>
+<li><a href="https://www.guiafoca.org/">Guia Foca Linux</a></li>
+</ul>
+<h3 id="livros">Livros:</h3>
+<ul>
+<li>
+<p><a href="https://www.amazon.com.br/Sistemas-operacionais-modernos-Andrew-Tanenbaum/dp/8543005671/ref=sr_1_1?index.html__mk_pt_BR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&amp;crid=SVTT0WMQRSEE&amp;dchild=1&amp;keywords=sistema+operacional&amp;qid=1612300968&amp;s=books&amp;sprefix=sistema+operaci%2Cstripbooks%2C263&amp;sr=1-1">Sistemas Operacionais</a></p>
+</li>
+<li>
+<p><a href="https://www.amazon.com.br/Linux-B%C3%ADblia-Christopher-Negus/dp/8576087995">Linux A Biblia</a></p>
+</li>
+<li>
+<p><a href="https://www.amazon.com.br/Certifica%C3%A7%C3%A3o-LPI-1-Luciano-Antonio-Siqueira/dp/8550810614/ref=sr_1_1?__mk_pt_BR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&amp;dchild=1&amp;keywords=lpi&amp;qid=1612301022&amp;s=books&amp;sr=1-1">LPIC-1</a></p>
+</li>
+<li>
+<p><a href="https://www.amazon.com.br/-Profissional-Aurelio-Marinho-Jargas/dp/8575221523/ref=pd_bxgy_img_3/140-0347945-3566272?_encoding=UTF8&amp;pd_rd_i=8575221523&amp;pd_rd_r=68f0b5ed-064a-4134-ad01-8c2925b77b4d&amp;pd_rd_w=2E1WI&amp;pd_rd_wg=1xiq8&amp;pf_rd_p=400138fd-99e3-44de-aed2-5a7aff7ca010&amp;pf_rd_r=N8D8ST00FMK71Q65Y76P&amp;psc=1&amp;refRID=N8D8ST00FMK71Q65Y76P">Shell - 1</a></p>
+</li>
+<li>
+<p><a href="https://www.amazon.com.br/Programa%C3%A7%C3%A3o-Shell-Linux-Julio-Cezar/dp/8574528331/ref=sr_1_2?__mk_pt_BR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&amp;dchild=1&amp;keywords=shell+&amp;qid=1612301124&amp;s=books&amp;sr=1-2">Shell - 2</a></p>
+</li>
+</ul>
+<h3 id="regex">Regex:</h3>
+<p>https://regex101.com/<br>
+https://pythex.org/</p>
+<h3 id="shell">Shell:</h3>
+<p>https://explainshell.com/</p>
+<p>https://cmdchallenge.com</p>
+<h3 id="vim">VIM</h3>
+<p>https://vim-adventures.com/</p>
+<h3 id="simulado-lpi-1">SIMULADO LPI 1</h3>
+<p>https://www.udemy.com/course/simulado-certificacao-lpic-1-e-comptia-linux/</p>
+
+</body>
+</html>
