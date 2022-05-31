@@ -287,6 +287,17 @@ tar = Empacotamento
 ---
 
 ## Gerenciamento de Usuários
+
+adduser = Cria novos usuário
+userdel = Deleta usuários
+usermod = Altera as propriedades de um usuário
+chage = Configurar as políticas de senha
+who - w = Mostra todos os usuários logados naquele momento
+finger = Mostra informações detalhadas do usuário
+id = Mostra id do usuário
+groups = Mostra os grupos que um usuário pertence
+getent = Mostra/Captura dados dos arquivos de base de dados do sistema, ex: passwd, shadow, groups, hosts...
+
 ### Administração de usuários
 
 /etc/passwd lala
