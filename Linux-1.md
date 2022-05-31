@@ -543,6 +543,7 @@ run-parts = Teste de execução das tarefas no cron
 - [Guia Foca Linux](https://www.guiafoca.org/)
 
 ### Livros:
+
 - [Sistemas Operacionais](https://www.amazon.com.br/Sistemas-operacionais-modernos-Andrew-Tanenbaum/dp/8543005671/ref=sr_1_1?index.html__mk_pt_BR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=SVTT0WMQRSEE&dchild=1&keywords=sistema+operacional&qid=1612300968&s=books&sprefix=sistema+operaci%2Cstripbooks%2C263&sr=1-1)
 
 - [Linux A Biblia](https://www.amazon.com.br/Linux-B%C3%ADblia-Christopher-Negus/dp/8576087995)
@@ -555,13 +556,19 @@ run-parts = Teste de execução das tarefas no cron
 - [Shell - 2](https://www.amazon.com.br/Programa%C3%A7%C3%A3o-Shell-Linux-Julio-Cezar/dp/8574528331/ref=sr_1_2?__mk_pt_BR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&dchild=1&keywords=shell+&qid=1612301124&s=books&sr=1-2)
 
 ### Regex:
-https://regex101.com/
-https://pythex.org/
+
+- https://regex101.com/
+- https://pythex.org/
+- https://regexr.com/
 
 ### Shell:
-https://explainshell.com/
 
-https://cmdchallenge.com
+- [https://explainshell.com/](https://explainshell.com/) -> explicação de comando do shell
+- [https://cheat.sh/](https://cheat.sh/) -> exemplos de utilização de comandos
+- [https://tldr.sh/](https://tldr.sh/) -> páginas de manual resumidas
+- [https://cmdchallenge.com](https://cmdchallenge.com) -> desafios de shell gameficados
+- [https://www.redhat.com/en/command-line-heroes/bash/index.html](https://www.redhat.com/en/command-line-heroes/bash/index.html) -> desafios de shell da Red Hat
+
 
 ### VIM
 https://vim-adventures.com/
