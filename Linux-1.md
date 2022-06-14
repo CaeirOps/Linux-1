@@ -159,19 +159,31 @@ insserv =
 ### Documentações e Filtros
 
 man = Manual dos comandos, contendo descrição e os parametros possiveis
+
 mandb = Criar ou atualizar o cache dos manuais
+
 help = Ajuda sintetizada sobre o comando
+
 apropos ou man -k = Mostra o propósito do comando
 
 wc = Contagem bytes, palavras, linhas, etc..
+
 head = Pega as primeiras 10 linhas de um arquivo ou saida de um comando
+
 tail = Mesma coisa que o head, porém com o final do conteúdo
+
 sort = Ordena a saída
+
 tr = Transforma minusculo em maiusculo
+
 cut = Filtrar com delimitador e pegar somente os campos desejados
+
 awk = Filtrar com delimitador e pegar somente os campos desejados
+
 locate = Verficar a localização de um arquivo
+
 grep - egrep = Filtros por palavra chave
+
 diff = Visualizar a diferença entre os arquivos
 
 
